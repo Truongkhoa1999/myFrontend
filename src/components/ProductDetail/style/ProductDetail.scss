@@ -1,0 +1,116 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  .product-detail-container {
+    display: flex;
+
+    // flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4rem;
+    margin: auto;
+    height: 40%;
+    width: 50%;
+    .content-container {
+      width: 50%;
+      overflow-y: scroll;
+      color: red;
+
+      h1 {
+        font-size: 50px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: orange;
+      }
+
+      p {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: black;
+      }
+    }
+    .img__container {
+      display: flex;
+      align-items: flex-start;
+      max-width: 500px;
+      max-height: 500px;
+      .main {
+        max-width: 400px;
+        border-radius: 10px;
+        max-height: 400px;
+        min-height: 400px;
+        min-width: 400px;
+        padding: 1rem;
+        object-fit: cover;
+        transition: transform 0.3s ease-in-out;
+        border: 2px solid orange;
+      }
+
+      .detailImage {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        margin-left: 20px;
+
+        .second,
+        .third,
+        .fourth {
+          max-height: 50px;
+          max-width: 50px;
+          margin-top: 1rem;
+          border: 1px solid orange;
+          cursor: pointer;
+          transition: transform 0.3s ease-in-out;
+          border-radius: 10px;
+          &:hover {
+            transform: scale(1.2);
+          }
+        }
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+
+      img {
+        margin-right: 0;
+        margin-bottom: 20px;
+      }
+    }
+  }
+  .relevant__products {
+    display: flex;
+    width: 75%;
+    color: orange;
+    flex-direction: column;
+    margin: auto;
+    // justify-content: space-between;
+    align-items: center;
+    padding: 4rem;
+    .listcard {
+      display: flex;
+      flex-wrap: wrap;
+      width: 60%;
+      flex-direction: row;
+      justify-content: space-evenly;
+      .multicard {
+        margin: 0.5rem;
+        height: 270px;
+        width: 250px;
+      }
+    }
+  }
+}
+// .multicard + .multicard {
+//   margin: 0.5rem;
+//   height: 270px;
+//   width: 250px;
+//   @media screen and (max-width: 600px) {
+//     height: 250px;
+//     width: 100%;
+//   }
+// }
