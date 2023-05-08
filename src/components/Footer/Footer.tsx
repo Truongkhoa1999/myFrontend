@@ -16,7 +16,7 @@ export const Footer: FC = (): ReactElement => {
         left: 0,
         right: 0,
       }}
-      position="static"
+      // position="absolute"
     >
       <Container maxWidth="lg">
         <Grid container direction="column" alignItems="center">
