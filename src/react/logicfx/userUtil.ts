@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Product } from '../type/Products/products'
-import { User, UserStatus } from '../type/User/User'
+import { User, UserStatus } from '../../type/User/User'
 
 // SignIn check as Users
 export function findMatchingUser(email: string, password: string, users: User[]) {

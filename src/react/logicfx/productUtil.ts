@@ -1,5 +1,5 @@
-import { ProductResponse } from '../redux/actions/products'
-import { CartProps } from '../redux/reducers/productsReducer'
+import { ProductResponse } from '../../redux/actions/products'
+import { CartProps } from '../../redux/reducers/productsReducer'
 import { Product } from '../type/Products/products'
 
 export const pushItemToCart = (cart: CartProps[], id: number): CartProps[] => {

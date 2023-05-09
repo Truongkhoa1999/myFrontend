@@ -28,10 +28,6 @@ const HomePage: React.FC = () => {
   }
   // Best sellers data
   const bestSeller = products.filter((p) => p.quantity < 10)
-  // Handling capture quantity
-  const initialProductQuantity = (products.map((p) => p.quantity)[
-    (captureQuantity, setCaptureQuantity)
-  ] = useState<number>(products.map((p) => p.quantity)))
 
   return (
     <div className="container">
