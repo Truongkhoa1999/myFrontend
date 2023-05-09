@@ -4,12 +4,12 @@ import {
   FETCH_PRODUCTS_REQUEST,
   FETCH_PRODUCTBYID_SUCCESS,
 } from '../actions/products'
-import { Product } from '../actions/products'
+import { ProductProps } from '../../type/Product/ProductProps'
 
 export interface ProductState {
   loading: boolean
   error: string | null
-  selectedProduct: Product | null
+  selectedProduct: ProductProps | null
 }
 
 const initialState: ProductState = {
