@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { ThunkDispatch } from 'redux-thunk'
 import { RootState } from '../../redux/store'
-import { fetchProducts } from '../../redux/actions/products'
+import { fetchProducts } from '../../redux/actions/getProducts'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch } from '../../redux/store'
-import { stateProps } from '../../redux/reducers/productReducer'
+import { stateProps } from '../../redux/reducers/productsReducer'
 import MultiActionAreaCard from '../HomPage/MultiActionAreaCard'
 import Navbar from '../NavBar/NavBar'
 import { CircularProgress, Link } from '@mui/material'
@@ -14,7 +14,7 @@ import './style/SearchResult.scss'
 import AuthContext from '../../react/context/AuthContext'
 import SearchContext from '../../react/context/SerachContext'
 import { NavBar2 } from '../NavBar/NavBar2'
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom'
 
 export default function SearchResult() {
   const dispatch = useDispatch<AppDispatch>()

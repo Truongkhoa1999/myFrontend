@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Product } from '../type/Products/products'
+import { Product } from '../type/Products/ProductProps'
 import { User, UserStatus } from '../type/User/User'
 
 // SignIn check as Users

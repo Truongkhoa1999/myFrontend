@@ -6,7 +6,7 @@ import { useSearchContext } from '../../react/context/SerachContext'
 import { Produx } from '../../Data/Produx'
 import { Avatar, Badge, Menu, MenuItem } from '@mui/material'
 import { ShoppingCart } from '@mui/icons-material'
-import { stateProps } from '../../redux/reducers/productReducer'
+import { ProductState } from '../../redux/reducers/productsReducer'
 import { RootState } from '../../redux/store'
 import { useSelector } from 'react-redux'
 import './style/NavBar2.scss'
@@ -19,7 +19,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css'
 export const NavBar2 = () => {
   const navigate = useNavigate()
   const { product, setProduct } = useSearchContext()
-  const { cart } = useSelector((state: RootState): stateProps => state.products)
+  // const { cart } = useSelector((state: RootState): ProductState => state.products)
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
   // Auth users
@@ -73,13 +73,13 @@ export const NavBar2 = () => {
       {/* right groups */}
       <div className="right">
         <div className="cart__container2">
-          <Badge badgeContent={cart.length} color="primary">
+          {/* <Badge badgeContent={cart.length} color="primary">
             <ShoppingCart
               onClick={() => {
                 navigate('/cart')
               }}
             />
-          </Badge>
+          </Badge> */}
         </div>
         <div className="profile__container" onClick={handleMenuClick}>
           <div className="avatagroup">

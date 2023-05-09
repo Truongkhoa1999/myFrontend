@@ -1,4 +1,4 @@
-import { Product } from '../type/Products/products'
+import { Product } from '../type/Products/ProductProps'
 // This is for backup solution when fetch data gone wrong
 export type ProduxProps = {
   id: number

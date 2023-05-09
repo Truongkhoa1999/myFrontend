@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { stateProps } from '../../redux/reducers/productReducer';
-import { RootState } from '../../redux/store';
-import './style/PostCarouse2.scss';
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { stateProps } from '../../redux/reducers/productsReducer'
+import { RootState } from '../../redux/store'
+import './style/PostCarouse2.scss'
 
 interface Post {
-  id: number;
-  title: string;
-  imageUrl: string;
+  id: number
+  title: string
+  imageUrl: string
 }
 
 const POSTS: Post[] = [
@@ -19,44 +19,43 @@ const POSTS: Post[] = [
   {
     id: 2,
     title: 'Post 2',
-    imageUrl: 'https://www.feedough.com/wp-content/uploads/2019/07/hostinger-black-friday-sale.webp',
+    imageUrl:
+      'https://www.feedough.com/wp-content/uploads/2019/07/hostinger-black-friday-sale.webp',
   },
   {
     id: 3,
     title: 'Post 3',
     imageUrl: 'https://img.paisawapas.com/ovz3vew9pw/2023/01/03165919/tatacliq-PaisaWapas-Deal.jpg',
   },
-];
-const ITEMS_PER_PAGE = 1;
-const AUTO_CYCLE_INTERVAL = 4000;
+]
+const ITEMS_PER_PAGE = 1
+const AUTO_CYCLE_INTERVAL = 4000
 
-const  PostCarouse2 = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-
+const PostCarouse2 = () => {
+  const [currentPage, setCurrentPage] = useState(1)
 
   React.useEffect(() => {
     const intervalId = setInterval(() => {
-      setCurrentPage(currentPage => currentPage === POSTS.length ? 1 : currentPage + 1);
-    }, AUTO_CYCLE_INTERVAL);
+      setCurrentPage((currentPage) => (currentPage === POSTS.length ? 1 : currentPage + 1))
+    }, AUTO_CYCLE_INTERVAL)
 
-    return () => clearInterval(intervalId);
-  }, []);
+    return () => clearInterval(intervalId)
+  }, [])
 
   const handlePageClick = (pageNum: number) => {
-    setCurrentPage(pageNum);
+    setCurrentPage(pageNum)
   }
 
-  const totalPages = Math.ceil(POSTS.length / ITEMS_PER_PAGE);
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const endIndex = startIndex + ITEMS_PER_PAGE;
-  const currentPosts = POSTS.slice(startIndex, endIndex);
+  const totalPages = Math.ceil(POSTS.length / ITEMS_PER_PAGE)
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
+  const endIndex = startIndex + ITEMS_PER_PAGE
+  const currentPosts = POSTS.slice(startIndex, endIndex)
 
   return (
     <div className="app">
       {currentPosts.map((post) => (
         <div key={post.id} className="post">
-          <img className='app__image' src={post.imageUrl} alt={post.title} />
-          
+          <img className="app__image" src={post.imageUrl} alt={post.title} />
         </div>
       ))}
       <div className="pagination">
@@ -71,7 +70,7 @@ const  PostCarouse2 = () => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PostCarouse2;
+export default PostCarouse2

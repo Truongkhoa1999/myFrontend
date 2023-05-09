@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from 'react'
-import { Product } from '../../type/Products/products'
+import { Product } from '../../type/Products/ProductProps'
 
 export type SearchContextType = {
   product: Product[] | null

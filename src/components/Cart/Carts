@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { AppDispatch, RootState } from '../../redux/store'
-import { Product } from '../../type/Products/products'
+import { Product } from '../../type/Products/ProductProps'
 import { Footer } from '../Footer/Footer'
 import Navbar from '../NavBar/NavBar'
 import './style/Cart.scss'
@@ -10,7 +10,7 @@ import {
   decreaseQuantity,
   increaseQuantity,
   saveCart,
-} from '../../redux/actions/products'
+} from '../../redux/actions/getProducts'
 import { useNavigate } from 'react-router-dom'
 import { NavBar2 } from '../NavBar/NavBar2'
 import { useEffect, useState } from 'react'

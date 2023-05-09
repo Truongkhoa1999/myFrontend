@@ -1,0 +1,49 @@
+// CARDS PLS BRING TO ANOTHER FILE
+export const ADD_CART = 'ADD_CART'
+export const INCREASE_QUANTITY = 'INCREASE_QUANTITY'
+export const DECREASE_QUANTITY = 'DECREASE_QUANTITY'
+export const SAVE_CART = 'SAVE_CART'
+export type CartProps = {
+  id: number
+  quantity: number
+}
+// Add cart
+export interface addItemToCart {
+  type: typeof ADD_CART
+  payload: CartProps
+}
+export interface increaseQuantity {
+  type: typeof INCREASE_QUANTITY
+  payload: {
+    productId: number
+    quantity: number
+  }
+}
+export const addItemToCart = (id: number) => {
+  return {
+    type: ADD_CART,
+    payload: id,
+  }
+}
+// update quantity
+export const increaseQuantity = (productId: number) => {
+  return {
+    type: INCREASE_QUANTITY,
+    payload: productId,
+  }
+}
+
+export const decreaseQuantity = (productId: number) => {
+  return {
+    type: DECREASE_QUANTITY,
+    payload: productId,
+  }
+}
+// save cart for users
+export function saveCart(cart: CartProps[]) {
+  return {
+    type: SAVE_CART,
+    payload: cart,
+  }
+}
+// <>><<>>

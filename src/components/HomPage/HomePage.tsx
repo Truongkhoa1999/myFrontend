@@ -1,10 +1,9 @@
 // React Redux
 import * as React from 'react'
 import { RootState } from '../../redux/store'
-import { fetchProducts } from '../../redux/actions/products'
+import { fetchProducts } from '../../redux/actions/getProducts'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch } from '../../redux/store'
-import { stateProps } from '../../redux/reducers/productReducer'
 import { Link } from 'react-router-dom'
 
 // Context
@@ -24,6 +23,7 @@ import './style/HomePage.scss'
 // Data
 import { Product } from '../../type/Products/products'
 import { ProduxProps } from '../../Data/Produx'
+import { ProductProps } from '../../type/Products/ProductProps'
 
 export default function HomePage() {
   const dispatch = useDispatch<AppDispatch>()
@@ -32,50 +32,49 @@ export default function HomePage() {
   const produx = useSelector((state: RootState) => state.produx)
   const { products } = useSelector((state: RootState) => state.products)
   // Sort group
-  const [sortedProducts, setSortedProducts] = React.useState<Product[]>([])
+  const [sortedProducts, setSortedProducts] = React.useState<ProductProps[]>([])
   const [sortDirection, setSortDirection] = React.useState<'asc' | 'desc'>('asc')
 
   // Category group
   const [categoryFilter, setCategoryFilter] = React.useState<string | null>(null)
-  const [filteredProducts, setFilteredProducts] = React.useState<Product[]>([])
+  const [filteredProducts, setFilteredProducts] = React.useState<ProductProps[]>([])
   // Produx after added or removed or unremoved
-  const [updatedProdux, setUpdatedProdux] = React.useState<ProduxProps[]>([])
+  const [updatedProdux, setUpdatedProdux] = React.useState<ProductProps[]>([])
   //
   // make this filteredProdux be updated whenever new staus comes
   React.useEffect(() => {
-    setUpdatedProdux(produx.filter((p) => !p.status?.isRemoved || p.status.isArrival))
-  }, [produx])
+    setUpdatedProdux(products.filter((p) => !p.status?.removed))
+    // setUpdatedProdux(produx.filter((p) => !p.status?.removed || p.status.isArrival))
+  }, [products])
 
+  // New design doesnt need to save it to local storage:
+  // const localProductsResponse = JSON.parse(localStorage.getItem('products') || '{}')
+  // const localProductsData: ProduxProps[] = localProductsResponse.data
+  // console.log(localProductsData, 'this is my local products')
   // Fetch API for products here is also in which location for products
   React.useEffect(() => {
     dispatch(fetchProducts())
-  }, [dispatch])
-  const localProductsResponse = JSON.parse(localStorage.getItem('products') || '{}')
-  const localProductsData: ProduxProps[] = localProductsResponse.data
-  console.log(localProductsData, 'this is my local products')
-
+  }, [])
+  console.log(products)
   // the new version for  Produx
   React.useEffect(() => {
-    if (produx) {
+    if (products) {
       // Clone the array to avoid mutating the original state
-      const clonedProducts = [...updatedProdux]
-
+      const clonedProducts = products
       // Sort the products by price
       clonedProducts.sort((a, b) =>
         sortDirection === 'asc' ? a.price - b.price : b.price - a.price
       )
-
       // Update the state with the sorted products
       setSortedProducts(clonedProducts)
     }
   }, [produx, sortDirection])
 
-  console.log('this is default sort product', sortedProducts)
   // for produx
   React.useEffect(() => {
     if (categoryFilter !== null) {
       const filteredProducts = updatedProdux.filter(
-        (product) => product.category === categoryFilter
+        (product) => product.category.title === categoryFilter
       )
       setFilteredProducts(filteredProducts)
     } else {
@@ -106,10 +105,8 @@ export default function HomePage() {
           <div className="category__menu">
             <h1>Products</h1>
             <div className="buttongroup">
-              <button onClick={() => handleCategoryFilter('laptops')}>laptops</button>
-              <button onClick={() => handleCategoryFilter('smartphones')}>smartphones</button>
-              <button onClick={() => handleCategoryFilter('fragrances')}>fragrances</button>
-              <button onClick={() => handleCategoryFilter('skincare')}>skincare</button>
+              <button onClick={() => handleCategoryFilter('Motherboard')}>Motherboard</button>
+              <button onClick={() => handleCategoryFilter('Smartphone')}>Smartphone</button>
               <button onClick={() => handleCategoryFilter(null)}>All</button>
             </div>
           </div>

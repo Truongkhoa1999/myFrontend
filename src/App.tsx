@@ -10,7 +10,7 @@ import { fetchUsers, LOCAL_USER } from './redux/actions/users'
 import AuthContext from './react/context/AuthContext'
 import SearchContext from './react/context/SerachContext'
 import { User } from './type/User/User'
-import { Product } from './type/Products/products'
+import { ProductProps } from './type/Products/ProductProps'
 
 // Components
 import SignIn from './components/Login/SignIn'
@@ -19,13 +19,13 @@ import SearchResult from './components/SearchResult/SearchResult'
 import ProductDetail from './components/ProductDetail/ProductDetail'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 import AdminPannel from './components/Adminpannel/AdminPannel'
-import Cart from './components/Cart/Cart'
+// import Cart from './components/Cart/Cart'
 import Checkout from './components/Checkout/Checkout'
 
 function App(): JSX.Element {
   const dispatch = useDispatch<AppDispatch>()
   const [user, setUser] = React.useState<User | null>(null)
-  const [product, setProduct] = React.useState<Product[] | null>(null)
+  const [product, setProduct] = React.useState<ProductProps[] | null>(null)
   const [count, setCount] = React.useState<number | null>(null)
 
   // check users exist in Local Storage
@@ -53,7 +53,7 @@ function App(): JSX.Element {
                 </ProtectedRoute>
               }
             />
-            <Route path="/cart" element={<Cart />}></Route>
+            {/* <Route path="/cart" element={<Cart />}></Route> */}
             <Route path="/checkout" element={<Checkout />}></Route>
           </Routes>
         </SearchContext.Provider>

@@ -1,6 +1,6 @@
-import { ProductResponse } from '../redux/actions/products'
-import { CartProps } from '../redux/reducers/productReducer'
-import { Product } from '../type/Products/products'
+import { ProductResponse } from '../redux/actions/getProducts'
+import { CartProps } from '../redux/reducers/productsReducer'
+import { Product } from '../type/Products/ProductProps'
 
 export const pushItemToCart = (cart: CartProps[], id: number): CartProps[] => {
   // check if item exist in cart
