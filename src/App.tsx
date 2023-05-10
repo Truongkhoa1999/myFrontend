@@ -10,7 +10,7 @@ import { fetchUsers, LOCAL_USER } from './redux/actions/users'
 import AuthContext from './react/context/AuthContext'
 import SearchContext from './react/context/SerachContext'
 import { User } from './type/User/User'
-import { ProductProps } from './type/Products/ProductProps'
+import { ProductProps } from './type/Product/ProductProps'
 
 // Components
 import SignIn from './components/Login/SignIn'
@@ -21,6 +21,7 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 import AdminPannel from './components/Adminpannel/AdminPannel'
 // import Cart from './components/Cart/Cart'
 import Checkout from './components/Checkout/Checkout'
+import Cart from './components/Cart/style/Cart'
 
 function App(): JSX.Element {
   const dispatch = useDispatch<AppDispatch>()
@@ -53,7 +54,7 @@ function App(): JSX.Element {
                 </ProtectedRoute>
               }
             />
-            {/* <Route path="/cart" element={<Cart />}></Route> */}
+            <Route path="/cart" element={<Cart />}></Route>
             <Route path="/checkout" element={<Checkout />}></Route>
           </Routes>
         </SearchContext.Provider>

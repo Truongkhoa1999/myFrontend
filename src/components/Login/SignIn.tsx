@@ -18,7 +18,6 @@ import { CircularProgress } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch } from '../../redux/store'
 import { RootState } from '../../redux/store'
-import { stateProps, userReducer } from '../../redux/reducers/userReducer'
 import { banUser, fetchUsers, LOCAL_USER } from '../../redux/actions/users'
 // Hard data
 import { admins } from '../../Data/Admins'
@@ -31,38 +30,53 @@ import AuthContext, { useAuthContext } from '../../react/context/AuthContext'
 
 // Style
 import './style/signin.scss'
+// import { Token } from '@mui/icons-material'
 
 const theme = createTheme()
 
 export default function SignIn() {
   // default declaration
   const dispatch = useDispatch<AppDispatch>()
-  const { isLoading, users } = useSelector((state: RootState): stateProps => state.users)
   const navigate = useNavigate()
   const [isWarning, setIsWarning] = React.useState(false)
   const { user, setUser } = useAuthContext()
 
   // HANDLE SUBMIT
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
     const input = {
-      email: data.get('email') as string,
+      username: data.get('username') as string,
       password: data.get('password') as string,
     }
-    console.log('users ??', users)
-    const matchingUser = findMatchingUser(input.email, input.password, users.data)
-    const matchingAdmin = findMatchingUser(input.email, input.password, admins)
-    const matchUsers = matchingAdmin || matchingUser
-    if (matchUsers) {
-      setUser(matchUsers)
-      localStorage.setItem(LOCAL_USER, JSON.stringify(matchUsers))
-      navigate('/homepage')
-    } else {
-      console.log(`No this is a spy`)
+    try {
+      const response = await fetch('http://localhost:8080/signin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(input),
+      })
+      const responseJson = await response.json()
+      if (responseJson.token && responseJson.user) {
+        const { token, user } = responseJson
+        console.log('here is token', token)
+        // Store the token in local storage for future use
+        localStorage.setItem('jwt', token)
+        // Set the authenticated user in the context or Redux store
+        setUser(user)
+        // Navigate to the homepage
+        navigate('/homepage')
+      } else {
+        console.log('Sign-in failed:', response.statusText)
+        setIsWarning(true)
+      }
+    } catch (error) {
+      console.log('Sign-in failed:', error)
       setIsWarning(true)
     }
   }
+
   return (
     <ThemeProvider theme={theme}>
       <div className="container">
@@ -88,10 +102,10 @@ export default function SignIn() {
                   margin="normal"
                   required
                   fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
+                  id="username"
+                  label="username"
+                  name="username"
+                  autoComplete="username"
                   autoFocus
                 />
                 <TextField

@@ -21,15 +21,14 @@ import { CircularProgress } from '@mui/material'
 import './style/HomePage.scss'
 
 // Data
-import { Product } from '../../type/Products/products'
 import { ProduxProps } from '../../Data/Produx'
-import { ProductProps } from '../../type/Products/ProductProps'
+import { ProductProps } from '../../type/Product/ProductProps'
 
 export default function HomePage() {
   const dispatch = useDispatch<AppDispatch>()
 
   // Pordux hard code
-  const produx = useSelector((state: RootState) => state.produx)
+  // const produx = useSelector((state: RootState) => state.produx)
   const { products } = useSelector((state: RootState) => state.products)
   // Sort group
   const [sortedProducts, setSortedProducts] = React.useState<ProductProps[]>([])
@@ -68,7 +67,7 @@ export default function HomePage() {
       // Update the state with the sorted products
       setSortedProducts(clonedProducts)
     }
-  }, [produx, sortDirection])
+  }, [products, sortDirection])
 
   // for produx
   React.useEffect(() => {

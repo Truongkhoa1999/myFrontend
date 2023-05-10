@@ -4,28 +4,14 @@ import {
   FETCH_PRODUCTBYID_REQUEST,
   FETCH_PRODUCTBYID_SUCCESS,
 } from '../actions/getProductById'
-import { ProductProps } from '../../type/Products/ProductProps'
-export interface Product {
-  id: string
-  title: string
-  price: number
-  quantity: number
-  brand: string
-  description: string
-  thumbnail: string
-  images: string[]
-  category: {
-    categoryId: string
-    title: string
-  }
-  removed: boolean
-}
-export interface ProductState {
+import { ProductProps } from '../../type/Product/ProductProps'
+
+export interface ProductByIdState {
   loading: boolean
   error: string | null
-  productById: Product | Product[] | null
+  productById: ProductProps | null
 }
-const initialState: ProductState = {
+const initialState: ProductByIdState = {
   loading: false,
   error: null,
   productById: null,
@@ -33,14 +19,14 @@ const initialState: ProductState = {
 export default function productByIdReducer(
   state = initialState,
   action: ProductByIdActionTypes
-): ProductState {
+): ProductByIdState {
   switch (action.type) {
     case FETCH_PRODUCTBYID_REQUEST:
       console.log('is fetching')
       return {
         ...state,
         loading: true,
-        productById: null,
+        // productById: null,
       }
     case FETCH_PRODUCTBYID_SUCCESS:
       console.log('fetched done')

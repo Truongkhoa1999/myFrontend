@@ -19,7 +19,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css'
 export const NavBar2 = () => {
   const navigate = useNavigate()
   const { product, setProduct } = useSearchContext()
-  // const { cart } = useSelector((state: RootState): ProductState => state.products)
+  const { cart } = useSelector((state: RootState) => state.cart)
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
   // Auth users
@@ -73,13 +73,13 @@ export const NavBar2 = () => {
       {/* right groups */}
       <div className="right">
         <div className="cart__container2">
-          {/* <Badge badgeContent={cart.length} color="primary">
+          <Badge badgeContent={cart.length} color="primary">
             <ShoppingCart
               onClick={() => {
                 navigate('/cart')
               }}
             />
-          </Badge> */}
+          </Badge>
         </div>
         <div className="profile__container" onClick={handleMenuClick}>
           <div className="avatagroup">

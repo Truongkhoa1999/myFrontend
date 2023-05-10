@@ -5,7 +5,7 @@ import './style/AdminPannel.scss'
 import Ban from '../Ban/Ban'
 import { NavBar2 } from '../NavBar/NavBar2'
 import { Footer } from '../Footer/Footer'
-import AddorRemove from '../AddorRemove/AddorRemove'
+// import AddorRemove from '../AddorRemove/AddorRemove'
 
 const AdminPannel = () => {
   return (
@@ -14,7 +14,7 @@ const AdminPannel = () => {
       <div className="nav__container">
         <NavBar2 />
       </div>
-      <AddorRemove />
+      {/* <AddorRemove /> */}
       <div className="bangroup">
         <Ban />
       </div>

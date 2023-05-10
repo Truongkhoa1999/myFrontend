@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
 import { Dispatch } from 'react'
-import { ProductProps } from '../../type/Products/ProductProps'
+import { ProductProps } from '../../type/Product/ProductProps'
 
 // Variables
 export const FETCH_PRODUCTBYID_REQUEST = 'FETCH_PRODUCTBYID_REQUEST'
@@ -14,7 +14,7 @@ export interface fetchProductByIdRequestAction {
 // SUCCESS
 export interface fetchProductByIdSuccessAction {
   type: typeof FETCH_PRODUCTBYID_SUCCESS
-  payload: ProductProps[]
+  payload: ProductProps
 }
 // Action Failure
 export interface fetchProductByIdFailureAction {

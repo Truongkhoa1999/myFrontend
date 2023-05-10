@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { stateProps } from '../../redux/reducers/productsReducer'
 import { RootState } from '../../redux/store'
 import './style/PostCarouse2.scss'
 
