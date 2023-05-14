@@ -1,9 +1,9 @@
 import React, { createContext, useContext } from 'react'
-import { Product } from '../../type/Products/ProductProps'
+import { ProductProps } from '../../type/Product/ProductProps'
 
 export type SearchContextType = {
-  product: Product[] | null
-  setProduct: (product: Product | any) => void
+  product: ProductProps[] | null
+  setProduct: (product: ProductProps | any) => void
 }
 const SearchContext = createContext<SearchContextType>({
   product: null,

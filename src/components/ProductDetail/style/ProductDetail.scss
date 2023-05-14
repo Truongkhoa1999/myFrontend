@@ -1,116 +1,97 @@
 .container {
-  width: 100vw;
-  height: 100vh;
   display: flex;
   flex-direction: column;
+  height: 100vh;
   background-color: white;
-  .product-detail-container {
-    display: flex;
+  justify-content: space-between;
+}
+.body {
+  display: flex;
+  flex-wrap: wrap;
+  width: 75%;
+  align-self: center;
+}
+.img_container {
+  // flex: 1;
+  // width: 65%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 
-    // flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 4rem;
-    margin: auto;
-    height: 40%;
-    width: 50%;
-    .content-container {
-      width: 50%;
-      overflow-y: scroll;
-      color: red;
-
-      h1 {
-        font-size: 50px;
-        font-weight: bold;
-        margin-bottom: 10px;
-        color: orange;
-      }
-
-      p {
-        font-size: 20px;
-        margin-bottom: 10px;
-        color: black;
-      }
-    }
-    .img__container {
-      display: flex;
-      align-items: flex-start;
-      max-width: 500px;
-      max-height: 500px;
-      .main {
-        max-width: 400px;
-        border-radius: 10px;
-        max-height: 400px;
-        min-height: 400px;
-        min-width: 400px;
-        padding: 1rem;
-        object-fit: cover;
-        transition: transform 0.3s ease-in-out;
-        border: 2px solid orange;
-      }
-
-      .detailImage {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        margin-left: 20px;
-
-        .second,
-        .third,
-        .fourth {
-          max-height: 50px;
-          max-width: 50px;
-          margin-top: 1rem;
-          border: 1px solid orange;
-          cursor: pointer;
-          transition: transform 0.3s ease-in-out;
-          border-radius: 10px;
-          &:hover {
-            transform: scale(1.2);
-          }
-        }
-      }
-    }
-
-    @media screen and (max-width: 768px) {
-      flex-direction: column;
-
-      img {
-        margin-right: 0;
-        margin-bottom: 20px;
-      }
-    }
+  .mainImage {
+    width: 80%;
+    min-height: 400px;
+    max-height: 400px;
+    max-width: 500px;
+    border: 1px solid black;
   }
-  .relevant__products {
+
+  .detailImage {
     display: flex;
-    width: 75%;
-    color: orange;
-    flex-direction: column;
-    margin: auto;
-    // justify-content: space-between;
-    align-items: center;
-    padding: 4rem;
-    .listcard {
-      display: flex;
-      flex-wrap: wrap;
-      width: 60%;
-      flex-direction: row;
-      justify-content: space-evenly;
-      .multicard {
-        margin: 0.5rem;
-        height: 270px;
-        width: 250px;
-      }
+    // flex-direction: column;
+    margin-top: 16px;
+
+    img {
+      max-width: 80px;
+      height: auto;
+      margin-right: 8px;
+      cursor: pointer;
     }
   }
 }
-// .multicard + .multicard {
-//   margin: 0.5rem;
-//   height: 270px;
-//   width: 250px;
-//   @media screen and (max-width: 600px) {
-//     height: 250px;
-//     width: 100%;
-//   }
-// }
+
+.product-detail-container {
+  /* Styles for the product detail section */
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .content-container {
+    // text-align: center;
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 8px;
+      color: black;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 8px;
+      color: black;
+    }
+
+    h2 {
+      font-size: 18px;
+      margin-bottom: 16px;
+      color: black;
+    }
+
+    button {
+      padding: 8px 16px;
+      font-size: 16px;
+    }
+  }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .container {
+    /* Modify container styles for smaller screens */
+  }
+
+  .img_container {
+    /* Modify img_container styles for smaller screens */
+    width: 65%;
+  }
+
+  .product-detail-container {
+    /* Modify product-detail-container styles for smaller screens */
+    width: 65%;
+  }
+}

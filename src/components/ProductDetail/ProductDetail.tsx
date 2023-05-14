@@ -4,16 +4,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../../redux/store'
 // import { stateProps } from '../../redux/reducers/productsReducer'
 // import { addItemToCart } from '../../redux/actions/getProducts'
-
 // Data and type
-import { Produx, ProduxProps } from '../../Data/Produx'
-
 // Style
 import './style/ProductDetail.scss'
 import { v4 as uuidv4 } from 'uuid'
 // Components
 import { Footer } from '../Footer/Footer'
-import { NavBar2 } from '../NavBar/NavBar2'
 import MultiActionAreaCard from '../HomPage/MultiActionAreaCard'
 // import { saveCart } from '../../redux/actions/getProducts'
 import { useEffect, useState } from 'react'
@@ -22,6 +18,7 @@ import { getProductsById } from '../../redux/actions/getProductById'
 
 import { CartProps } from '../../type/Cart/CartProps'
 import { addItemToCart, increaseQuantity, saveCart } from '../../redux/actions/cart'
+import NavBar2 from '../NavBar/NavBar2'
 
 const ProductDetail = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -66,12 +63,10 @@ const ProductDetail = () => {
     }
 
     // Update the cart state after dispatching the actions
-    const updatedCart = [...cart, newItem]
+    // const updatedCart = [...cart, newItem]
+    // dispatch(saveCart(updatedCart))
 
-    dispatch(saveCart(updatedCart))
-
-    console.log('Existing Item:', existingItem)
-    console.log('Cart items:', updatedCart)
+    console.log(cart)
   }
 
   return (
@@ -80,41 +75,44 @@ const ProductDetail = () => {
       <div className="nav__container">
         <NavBar2 />
       </div>
-      {loading ? (
-        <CircularProgress />
-      ) : error ? (
-        <div>error</div>
-      ) : (
-        <div className="img__container">
-          <img className="main" src={mainImage ?? productById?.images[0]}></img>
-          <div className="detailImage">
-            <img
-              className="second"
-              onClick={() => handleImageHover(productById!.images[1])}
-              src={productById?.images[1]}
-            ></img>
-            <img
-              className="third"
-              onClick={() => handleImageHover(productById!.images[2])}
-              src={productById?.images[2]}
-            ></img>
-            <img
-              className="fourth"
-              onClick={() => handleImageHover(productById!.images[3])}
-              src={productById?.images[3]}
-            ></img>
+      <div className="body">
+        {loading ? (
+          <CircularProgress />
+        ) : error ? (
+          <div>error</div>
+        ) : (
+          <div className="img_container">
+            <img className="mainImage" src={mainImage ?? productById?.images[0]}></img>
+            <div className="detailImage">
+              <img
+                className="second"
+                onClick={() => handleImageHover(productById!.images[1])}
+                src={productById?.images[1]}
+              ></img>
+              <img
+                className="third"
+                onClick={() => handleImageHover(productById!.images[2])}
+                src={productById?.images[2]}
+              ></img>
+              <img
+                className="fourth"
+                onClick={() => handleImageHover(productById!.images[3])}
+                src={productById?.images[3]}
+              ></img>
+            </div>
+          </div>
+        )}
+        <div className="product-detail-container">
+          <div className="content-container">
+            <h1>{productById?.title}</h1>
+            <p>{`category: ${productById?.category} - Brand: ${productById?.brand}`}</p>
+            <h2>{`${productById?.price} € `}</h2>
+            <p>{productById?.description}</p>
+            <button onClick={handleAddToCart}>Add to cart</button>
           </div>
         </div>
-      )}
-      <div className="product-detail-container">
-        <div className="content-container">
-          <h1>{productById?.title}</h1>
-          <p>{`category: ${productById?.category} - Brand: ${productById?.brand}`}</p>
-          <h2>{`${productById?.price} € `}</h2>
-          <p>{productById?.description}</p>
-          <button onClick={handleAddToCart}>Add to cart</button>
-        </div>
       </div>
+
       {/* Relevant products */}
       <div className="footer__container">
         <Footer />

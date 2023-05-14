@@ -24,7 +24,7 @@ const initialState: ProductState = {
 }
 
 //  Reducer
-export function productReducer(state = initialState, action: ProductActionTypes): ProductState {
+export function getProductsReducer(state = initialState, action: ProductActionTypes): ProductState {
   switch (action.type) {
     case FETCH_PRODUCTS_REQUEST: {
       console.log('Is requesting database')

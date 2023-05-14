@@ -19,7 +19,7 @@ import { ShoppingCart, Person } from '@mui/icons-material'
 import AuthContext from '../../react/context/AuthContext'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
-import { stateProps } from '../../redux/reducers/productsReducer'
+import { stateProps } from '../../redux/reducers/getProductsReducer'
 import { findMatchingSearch } from '../../logicfx/userUtil'
 import { useSearchContext } from '../../react/context/SerachContext'
 

@@ -13,7 +13,7 @@ $light-color: #f8f9fa;
   .updateGroup {
     display: flex;
     width: 95%;
-    flex-direction: row;
+    flex-direction: column;
     height: 50%;
     background-color: #000000;
     margin: 0 auto 0 auto;
@@ -102,7 +102,6 @@ $light-color: #f8f9fa;
       max-height: 150rem;
     }
 
-
     // Product list
     .product-list {
       width: 80%;
@@ -165,12 +164,9 @@ $light-color: #f8f9fa;
     }
   }
 
-
   h2 {
     margin-top: 0;
   }
-
-
 
   label {
     display: block;

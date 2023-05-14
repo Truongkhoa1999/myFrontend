@@ -1,71 +1,74 @@
 // React & Redux
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../redux/store'
-import { addProdux, removeProdux, unremoveProdux } from '../../redux/reducers/produxReducer'
+import { AppDispatch, RootState } from '../../redux/store'
+import { v4 as uuidv4 } from 'uuid'
 
 // style
 import '../Adminpannel/style/AdminPannel.scss'
 
 // Data type
 import { ProduxProps } from '../../Data/Produx'
+import { deleteProductsById } from '../../redux/actions/deleteProductById'
+import { ProductProps } from '../../type/Product/ProductProps'
+import { AnyAction } from 'redux'
+import { restoreProductsById } from '../../redux/actions/restoreProductById'
+import { fetchProducts } from '../../redux/actions/getProducts'
 
 // Components
 
 const AddorRemove = () => {
-  const products = useSelector((state: RootState) => state.products)
-  const dispatch = useDispatch()
-  const [filteredProducts, setFilteredProducts] = useState<ProduxProps[]>([])
+  const { products } = useSelector((state: RootState) => state.products)
+  const dispatch = useDispatch<AppDispatch>()
+  const [filteredProducts, setFilteredProducts] = useState<ProductProps[]>([])
+  // Manupulate products render
+  // const [newProduct, setNewProduct] = useState<ProduxProps>({
+  //   id: 0,uiy
+  //   title: '',
+  //   description: '',
+  //   price: 0,
+  //   brand: '',
+  //   category: '',
+  //   thumbnail: '',
+  //   images: [],
+  //   status: { isRemoved: false, isArrival: true },
+  // })
+  React.useEffect(() => {
+    dispatch(fetchProducts())
+  }, [])
 
-  const [newProduct, setNewProduct] = useState<ProduxProps>({
-    id: 0,
-    title: '',
-    description: '',
-    price: 0,
-    brand: '',
-    category: '',
-    thumbnail: '',
-    images: [],
-    status: { isRemoved: false, isArrival: true },
-  })
-  const handleRemoved = useCallback(
-    (id: number) => {
-      dispatch(removeProdux(id))
-    },
-    [newProduct.id]
-  )
-
-  const handleUnRemoved = useCallback(
-    (id: number) => {
-      dispatch(unremoveProdux(id))
-    },
-    [newProduct.id]
-  )
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    dispatch(addProdux(newProduct))
-    setNewProduct({
-      id: 0,
-      title: '',
-      description: '',
-      price: 0,
-      brand: '',
-      category: '',
-      thumbnail: '',
-      images: [],
-      status: { isRemoved: false, isArrival: true },
-    })
+  const handleRemoved = (id: ReturnType<typeof uuidv4>) => {
+    dispatch(deleteProductsById(id))
+  }
+  const handleUnRemoved = (id: ReturnType<typeof uuidv4>) => {
+    dispatch(restoreProductsById(id))
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setNewProduct({ ...newProduct, [name]: value })
-  }
+  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault()
+  //   dispatch(addProdux(newProduct))
+  //   setNewProduct({
+  //     id: 0,
+  //     title: '',
+  //     description: '',
+  //     price: 0,
+  //     brand: '',
+  //     category: '',
+  //     thumbnail: '',
+  //     images: [],
+  //     status: { isRemoved: false, isArrival: true },
+  //   })
+  // }
+
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  //   const { name, value } = e.target
+  //   setNewProduct({ ...newProduct, [name]: value })
+  // }
 
   // make this filteredProducts be updated whenever new staus comes
   useEffect(() => {
-    setFilteredProducts(products.filter((p) => !p.status?.isRemoved || p.status.isArrival))
+    // setFilteredProducts(products.filter((p) => !p.removed || p.status.isArrival))
+    setFilteredProducts(products.filter((p) => !p.removed))
   }, [products])
 
   return (
@@ -123,7 +126,7 @@ const AddorRemove = () => {
           </div>
         </div>
         {/* add groupd */}
-        <div className="addgroup">
+        {/* <div className="addgroup">
           <h2>Add New Product</h2>
           <form className="form" onSubmit={handleSubmit}>
             <label htmlFor="id">ID:</label>
@@ -199,7 +202,7 @@ const AddorRemove = () => {
             />
             <button type="submit">Add Product</button>
           </form>
-        </div>
+        </div> */}
       </div>
     </div>
   )

@@ -7,14 +7,12 @@ import { AppDispatch } from '../../redux/store'
 import { Link } from 'react-router-dom'
 
 // Context
-import AuthContext from '../../react/context/AuthContext'
 
 // Components & MUI
 import MultiActionAreaCard from './MultiActionAreaCard'
 import PostCarouse2 from './PostCarouse2'
 import { Footer } from '../Footer/Footer'
-import { NavBar2 } from '../NavBar/NavBar2'
-
+import NavBar2 from '../NavBar/NavBar2'
 import { CircularProgress } from '@mui/material'
 
 // Style
@@ -54,7 +52,6 @@ export default function HomePage() {
   React.useEffect(() => {
     dispatch(fetchProducts())
   }, [])
-  console.log(products)
   // the new version for  Produx
   React.useEffect(() => {
     if (products) {

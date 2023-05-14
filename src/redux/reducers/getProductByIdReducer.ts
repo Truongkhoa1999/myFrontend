@@ -4,6 +4,11 @@ import {
   FETCH_PRODUCTBYID_REQUEST,
   FETCH_PRODUCTBYID_SUCCESS,
 } from '../actions/getProductById'
+import {
+  DELETE_PRODUCTBYID_FAILURE,
+  DELETE_PRODUCTBYID_REQUEST,
+  DELETE_PRODUCTBYID_SUCCESS,
+} from '../actions/deleteProductById'
 import { ProductProps } from '../../type/Product/ProductProps'
 
 export interface ProductByIdState {
@@ -16,7 +21,7 @@ const initialState: ProductByIdState = {
   error: null,
   productById: null,
 }
-export default function productByIdReducer(
+export default function getProductByIdReducer(
   state = initialState,
   action: ProductByIdActionTypes
 ): ProductByIdState {

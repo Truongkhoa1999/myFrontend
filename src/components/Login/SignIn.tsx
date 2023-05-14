@@ -18,63 +18,34 @@ import { CircularProgress } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch } from '../../redux/store'
 import { RootState } from '../../redux/store'
-import { banUser, fetchUsers, LOCAL_USER } from '../../redux/actions/users'
 // Hard data
 import { admins } from '../../Data/Admins'
 
 // React
 import { useNavigate } from 'react-router-dom'
-import { findMatchingUser } from '../../logicfx/userUtil'
 import * as React from 'react'
-import AuthContext, { useAuthContext } from '../../react/context/AuthContext'
 
 // Style
 import './style/signin.scss'
-// import { Token } from '@mui/icons-material'
+import { setToken, setWarning } from '../../redux/actions/getToken'
+import { signin } from '../../utils/signin'
 
 const theme = createTheme()
 
 export default function SignIn() {
+  const navigate = useNavigate()
   // default declaration
   const dispatch = useDispatch<AppDispatch>()
-  const navigate = useNavigate()
-  const [isWarning, setIsWarning] = React.useState(false)
-  const { user, setUser } = useAuthContext()
-
-  // HANDLE SUBMIT
+  // const { isWarning } = useSelector((state: RootState) => state.isWarning)
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const data = new FormData(event.currentTarget)
-    const input = {
-      username: data.get('username') as string,
-      password: data.get('password') as string,
+
+    const formElements = event.currentTarget as HTMLFormElement
+    const { username, password } = formElements.elements as unknown as {
+      username: { value: string }
+      password: { value: string }
     }
-    try {
-      const response = await fetch('http://localhost:8080/signin', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(input),
-      })
-      const responseJson = await response.json()
-      if (responseJson.token && responseJson.user) {
-        const { token, user } = responseJson
-        console.log('here is token', token)
-        // Store the token in local storage for future use
-        localStorage.setItem('jwt', token)
-        // Set the authenticated user in the context or Redux store
-        setUser(user)
-        // Navigate to the homepage
-        navigate('/homepage')
-      } else {
-        console.log('Sign-in failed:', response.statusText)
-        setIsWarning(true)
-      }
-    } catch (error) {
-      console.log('Sign-in failed:', error)
-      setIsWarning(true)
-    }
+    dispatch(signin(username.value, password.value, navigate))
   }
 
   return (
@@ -141,9 +112,9 @@ export default function SignIn() {
             </Box>
           </Container>
         </div>
-        <div>
+        {/* <div>
           <div className="loading">{isWarning ? <CircularProgress /> : <h1></h1>}</div>
-        </div>
+        </div> */}
       </div>
     </ThemeProvider>
   )
