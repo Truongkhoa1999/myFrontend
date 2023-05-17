@@ -4,13 +4,7 @@ import { sortProductByCategory, sortProductsByRemove } from '../../utils/product
 import { Link } from 'react-router-dom'
 import MultiActionAreaCard from './MultiActionAreaCard'
 
-export default function FilterGroup({
-  products,
-  className,
-}: {
-  products: ProductProps[]
-  className: string
-}) {
+export default function FilterGroup({ products }: { products: ProductProps[] }) {
   const [categoryFilter, setCategoryFilter] = React.useState<string | null>(null)
   const [filteredProducts, setFilteredProducts] = React.useState<ProductProps[]>([])
   const [updatedProducts, setUpdatedProducts] = React.useState<ProductProps[]>([])
