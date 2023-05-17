@@ -61,7 +61,7 @@ export default function HomePage() {
         <PostCarouse2 />
       </div>
       <div className="main">
-        <FilterGroup products={products} className="main" />
+        <FilterGroup products={products}/>
       </div>
       {/* sort button */}
       <div className="sortgroup">
