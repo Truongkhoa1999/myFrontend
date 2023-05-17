@@ -5,7 +5,7 @@ import './style/AdminPannel.scss'
 // import Ban from '../Ban/Ban'
 
 import { Footer } from '../Footer/Footer'
-import NavBar2 from '../NavBar/NavBar2'
+import NavBar2 from '../NavBar/NavBar'
 import AddorRemove from '../AddorRemove/AddorRemove'
 // import AddorRemove from '../AddorRemove/AddorRemove'
 

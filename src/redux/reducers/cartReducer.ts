@@ -1,4 +1,3 @@
-import { pushItemToCart } from '../../logicfx/productUtil'
 import {
   ADD_CART,
   INCREASE_QUANTITY,
@@ -29,7 +28,7 @@ export const cartReducer = (state = initialState, action: AnyAction) => {
     case INCREASE_QUANTITY: {
       const productId = action.payload
       const updatedCart = state.cart.map((item) => {
-        if (item.id === productId) {
+        if (item.cartId === productId) {
           return {
             ...item,
             quantity: item.quantity + 1,
@@ -46,7 +45,7 @@ export const cartReducer = (state = initialState, action: AnyAction) => {
     case DECREASE_QUANTITY: {
       const productId = action.payload
       const updatedCart = state.cart.map((item) => {
-        if (item.id === productId) {
+        if (item.cartId === productId) {
           return {
             ...item,
             quantity: item.quantity - 1,

@@ -16,7 +16,8 @@ import SearchResult from './components/SearchResult/SearchResult'
 import ProductDetail from './components/ProductDetail/ProductDetail'
 import AdminPannel from './components/Adminpannel/AdminPannel'
 // import Cart from './components/Cart/Cart'
-import Cart from './components/Cart/style/Cart'
+import Cart from './components/Cart/Cart'
+import Dashboard from './components/Dashboard/Dashboard'
 
 function App(): JSX.Element {
   const dispatch = useDispatch<AppDispatch>()
@@ -34,6 +35,7 @@ function App(): JSX.Element {
           <Route path="/search" element={<SearchResult />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/adminpannel" element={<AdminPannel />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           {/* <Route
             path="/adminpannel"
             element={

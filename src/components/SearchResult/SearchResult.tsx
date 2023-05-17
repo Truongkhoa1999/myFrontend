@@ -13,7 +13,7 @@ import './style/SearchResult.scss'
 import SearchContext from '../../react/context/SerachContext'
 
 import { Link as RouterLink } from 'react-router-dom'
-import NavBar2 from '../NavBar/NavBar2'
+import NavBar2 from '../NavBar/NavBar'
 
 export default function SearchResult() {
   const dispatch = useDispatch<AppDispatch>()

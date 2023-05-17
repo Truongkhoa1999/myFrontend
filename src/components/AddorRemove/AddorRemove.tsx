@@ -14,6 +14,8 @@ import { ProductProps } from '../../type/Product/ProductProps'
 import { AnyAction } from 'redux'
 import { restoreProductsById } from '../../redux/actions/restoreProductById'
 import { fetchProducts } from '../../redux/actions/getProducts'
+import { addProduct } from '../../redux/actions/addProduct'
+import { RequestProductProps } from '../../type/Product/RequestProductProps'
 
 // Components
 
@@ -21,6 +23,8 @@ const AddorRemove = () => {
   const { products } = useSelector((state: RootState) => state.products)
   const dispatch = useDispatch<AppDispatch>()
   const [filteredProducts, setFilteredProducts] = useState<ProductProps[]>([])
+  const [selectedCategory, setSelectedCategory] = useState('')
+
   // Manupulate products render
   // const [newProduct, setNewProduct] = useState<ProduxProps>({
   //   id: 0,uiy
@@ -44,21 +48,30 @@ const AddorRemove = () => {
     dispatch(restoreProductsById(id))
   }
 
-  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault()
-  //   dispatch(addProdux(newProduct))
-  //   setNewProduct({
-  //     id: 0,
-  //     title: '',
-  //     description: '',
-  //     price: 0,
-  //     brand: '',
-  //     category: '',
-  //     thumbnail: '',
-  //     images: [],
-  //     status: { isRemoved: false, isArrival: true },
-  //   })
-  // }
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    // Retrieve the form data here
+    const formData = new FormData(e.currentTarget)
+    const productData: RequestProductProps = {
+      title: formData.get('title') as string,
+      description: formData.get('description') as string,
+      price: Number(formData.get('price')),
+      brand: formData.get('brand') as string,
+      categoryId: selectedCategory,
+      thumbnail: formData.get('thumbnail') as string,
+      images: [formData.get('images') as string],
+      removed: false,
+      quantity: Number(formData.get('quantity')),
+    }
+
+    // Dispatch the addProduct action with the product data
+    dispatch(addProduct(productData))
+
+    // Clear the form or perform any other necessary actions
+    // For example:
+    e.currentTarget.reset()
+  }
 
   // const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
   //   const { name, value } = e.target
@@ -70,6 +83,8 @@ const AddorRemove = () => {
     // setFilteredProducts(products.filter((p) => !p.removed || p.status.isArrival))
     setFilteredProducts(products.filter((p) => !p.removed))
   }, [products])
+
+  // Checkboxes for category
 
   return (
     <div>
@@ -126,83 +141,38 @@ const AddorRemove = () => {
           </div>
         </div>
         {/* add groupd */}
-        {/* <div className="addgroup">
+        <div className="addgroup">
           <h2>Add New Product</h2>
           <form className="form" onSubmit={handleSubmit}>
-            <label htmlFor="id">ID:</label>
-            <input
-              type="number"
-              id="id"
-              name="id"
-              value={newProduct.id}
-              onChange={handleChange}
-              required
-            />
+            {/* <label htmlFor="id">ID:</label>
+            <input type="number" id="id" name="id" required /> */}
             <label htmlFor="title">Title:</label>
-            <input
-              type="text"
-              id="title"
-              name="title"
-              value={newProduct.title}
-              onChange={handleChange}
-              required
-            />
+            <input type="text" id="title" name="title" required />
             <label htmlFor="description">Description:</label>
-            <textarea
-              id="description"
-              name="description"
-              value={newProduct.description}
-              onChange={handleChange}
-              required
-            />
+            <textarea id="description" name="description" required />
             <label htmlFor="price">Price:</label>
-            <input
-              type="number"
-              id="price"
-              name="price"
-              value={newProduct.price}
-              onChange={handleChange}
-              required
-            />
+            <input type="number" id="price" name="price" required />
             <label htmlFor="brand">Brand:</label>
-            <input
-              type="text"
-              id="brand"
-              name="brand"
-              value={newProduct.brand}
-              onChange={handleChange}
-              required
-            />
-            <label htmlFor="category">Category:</label>
-            <input
-              type="text"
-              id="category"
-              name="category"
-              value={newProduct.category}
-              onChange={handleChange}
-              required
-            />
+            <input type="text" id="brand" name="brand" required />
             <label htmlFor="thumbnail">Thumbnail URL:</label>
-            <input
-              type="url"
-              id="thumbnail"
-              name="thumbnail"
-              value={newProduct.thumbnail}
-              onChange={handleChange}
-              required
-            />
+            <input type="url" id="thumbnail" name="thumbnail" required />
             <label htmlFor="images">Image URLs:</label>
-            <input
-              type="text"
-              id="images"
-              name="images"
-              value={newProduct.images}
-              onChange={handleChange}
-              required
-            />
+            <input type="text" id="images" name="images" required />
+            <div>
+              <input
+                type="checkbox"
+                id="smartphone"
+                name="categories"
+                value="8c5c510c-089d-4220-b57b-056c46f0af95"
+                checked={selectedCategory === '8c5c510c-089d-4220-b57b-056c46f0af95'}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+              />
+              <input type="number" id="quantity" name="quantity" required />
+              <label htmlFor="smartphone">Smartphone</label>
+            </div>{' '}
             <button type="submit">Add Product</button>
           </form>
-        </div> */}
+        </div>
       </div>
     </div>
   )

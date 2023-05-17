@@ -18,7 +18,7 @@ import { getProductsById } from '../../redux/actions/getProductById'
 
 import { CartProps } from '../../type/Cart/CartProps'
 import { addItemToCart, increaseQuantity, saveCart } from '../../redux/actions/cart'
-import NavBar2 from '../NavBar/NavBar2'
+import NavBar2 from '../NavBar/NavBar'
 
 const ProductDetail = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -48,17 +48,19 @@ const ProductDetail = () => {
 
   const handleAddToCart = () => {
     const newItem: CartProps = {
-      id: productById?.id ?? '',
+      cartId: productById?.id ?? '',
       title: productById?.title ?? '',
       price: productById?.price ?? 0,
-      quantity: 1, // Set the initial quantity to 1
+      quantity: 1,
+      productId: productById?.id ?? '',
     }
 
-    const existingItem = cart.find((item: CartProps) => item.id === newItem.id)
+    const existingItem = cart.find((item: CartProps) => item.cartId === newItem.cartId)
 
     if (existingItem) {
       dispatch(increaseQuantity(existingItem.id))
     } else {
+      newItem.productId = productById?.id ?? ''
       dispatch(addItemToCart(newItem))
     }
 

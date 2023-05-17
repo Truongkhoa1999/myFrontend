@@ -1,6 +1,7 @@
 export type CartProps = {
-  id: string
+  cartId: string
   quantity: number
   title: string
   price: number
+  productId: String
 }

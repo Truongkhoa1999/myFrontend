@@ -44,7 +44,7 @@ export const deleteProductsById = (id: ReturnType<typeof uuidv4>) => {
       const response = await fetch(`http://localhost:8080/api/v1/products/delete/${id}`, {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json',
+          // 'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
       })
