@@ -1,47 +1,13 @@
 import React from 'react'
 import { CartProps } from '../type/Cart/CartProps'
 import { ProductProps } from '../type/Product/ProductProps'
+import { deleteProductsById } from '../redux/actions/deleteProductById'
+import { restoreProductsById } from '../redux/actions/restoreProductById'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '../redux/store'
+import jwtDecode from 'jwt-decode'
+import { DecodedToken } from '../type/DecodedToken/DecodedToken'
 
-// export const pushItemToCart = (cart: CartProps[], id: string): CartProps[] => {
-//   const newCart: CartProps[] = [...cart]
-//   const itemIdx = newCart.findIndex((item) => String(item.id) === String(id))
-//   if (itemIdx !== -1) {
-//     newCart[itemIdx] = {
-//       ...newCart[itemIdx],
-//       quantity: newCart[itemIdx].quantity + 1,
-//     }
-//   } else {
-//     newCart.push({
-//       id,
-//       title: '', // Set the appropriate title value here
-//       price: 0, // Set the appropriate price value here
-//       quantity: 1,
-//     })
-//   }
-//   return newCart
-// }
-
-// Compute total cart
-// export const getTotalPrice = (cart: CartProps[], products: any) => {
-//   let total = 0
-//   cart.forEach((item) => {
-//     const product = products.data.find((p: ProductProps) => p.id === item.id)
-//     if (product) {
-//       total += product.price * item.quantity
-//     }
-//   })
-//   return total
-// }
-// Create orders items: holding all items that are put into cart
-// export const createOrderItem = (item: CartProps, products: any) => {
-//   const product = products.data.find((p: ProductProps) => p.id === item.id)
-//   return {
-//     id: product?.id,
-//     name: product?.title,
-//     quantity: item.quantity,
-//     price: product?.price,
-//   }
-// }
 
 export const sortProductsByPrice = (
   products: ProductProps[],
@@ -64,3 +30,54 @@ export const sortProductByCategory = (
   const filteredProducts = updatedProducts.filter((item) => item.category.title === categoryFilter)
   return filteredProducts
 }
+// limit words title
+export function limitTitleWords(title:string, maxWords:number) :string {
+  const words = title.split(' ');
+  if (words.length > maxWords) {
+    return words.slice(0, maxWords).join(' ') + '...';
+  }
+  return title;
+}
+export function handleClick  (id:string)  {
+  // Make the API call to update the clicks property
+  fetch(`http://localhost:8080/api/v1/statics/clicks/${id}`, { method: 'PUT' })
+    .then(response => {
+      if (response.ok) {
+        console.log('Clicks updated successfully');
+      }
+    })
+    .catch(error => {
+      // Handle the error
+      console.error('Error updating clicks:', error);
+    });
+};
+
+// Adminpannel
+export function filterProductsBySearch (products: ProductProps[], searchQuery: string):ProductProps[]  {
+  return products.filter((p) => p.title.toLowerCase().includes(searchQuery.toLowerCase()))
+} 
+
+// Finding user carts information
+export const fetchCartByUserId = async () => {
+  try {
+    // Get token and check
+    const token = localStorage.getItem('jwt');
+    const decodedToken = token ? (jwtDecode(token) as DecodedToken) : null
+    const userId = decodedToken?.userId
+    if (!token) {
+      throw new Error('JWT token not found');
+    }
+
+    const url = `http://localhost:8080/api/v1/carts/${userId}`;
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    const data = await response.json();
+  } catch (error) {
+    console.log('Error fetching cart:', error);
+  }
+};

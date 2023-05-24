@@ -12,5 +12,11 @@ export interface ProductProps {
     categoryId: ReturnType<typeof uuidv4> // UUID string
     title: string
   }
+  statics:{
+    statId: ReturnType<typeof uuidv4>
+    clicks: number
+    rating: number
+    createdAt: Date
+  }
   removed: boolean
 }

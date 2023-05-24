@@ -4,9 +4,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../../redux/store'
 import { v4 as uuidv4 } from 'uuid'
 
-// style
-import '../Adminpannel/style/AdminPannel.scss'
-
 // Data type
 import { ProduxProps } from '../../Data/Produx'
 import { deleteProductsById } from '../../redux/actions/deleteProductById'
@@ -16,8 +13,7 @@ import { restoreProductsById } from '../../redux/actions/restoreProductById'
 import { fetchProducts } from '../../redux/actions/getProducts'
 import { addProduct } from '../../redux/actions/addProduct'
 import { RequestProductProps } from '../../type/Product/RequestProductProps'
-
-// Components
+import { Add } from '@mui/icons-material'
 
 const AddorRemove = () => {
   const { products } = useSelector((state: RootState) => state.products)
@@ -25,28 +21,12 @@ const AddorRemove = () => {
   const [filteredProducts, setFilteredProducts] = useState<ProductProps[]>([])
   const [selectedCategory, setSelectedCategory] = useState('')
 
-  // Manupulate products render
-  // const [newProduct, setNewProduct] = useState<ProduxProps>({
-  //   id: 0,uiy
-  //   title: '',
-  //   description: '',
-  //   price: 0,
-  //   brand: '',
-  //   category: '',
-  //   thumbnail: '',
-  //   images: [],
-  //   status: { isRemoved: false, isArrival: true },
-  // })
+
   React.useEffect(() => {
     dispatch(fetchProducts())
   }, [])
 
-  const handleRemoved = (id: ReturnType<typeof uuidv4>) => {
-    dispatch(deleteProductsById(id))
-  }
-  const handleUnRemoved = (id: ReturnType<typeof uuidv4>) => {
-    dispatch(restoreProductsById(id))
-  }
+
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -64,19 +44,12 @@ const AddorRemove = () => {
       removed: false,
       quantity: Number(formData.get('quantity')),
     }
-
     // Dispatch the addProduct action with the product data
     dispatch(addProduct(productData))
-
-    // Clear the form or perform any other necessary actions
-    // For example:
     e.currentTarget.reset()
   }
 
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-  //   const { name, value } = e.target
-  //   setNewProduct({ ...newProduct, [name]: value })
-  // }
+
 
   // make this filteredProducts be updated whenever new staus comes
   useEffect(() => {
@@ -88,8 +61,8 @@ const AddorRemove = () => {
 
   return (
     <div>
-      {/* remove or un remove and upadte render list */}
-      <div className="updateGroup">
+      <Add />
+      {/* <div className="updateGroup">
         <div className="tablegroup">
           <table className="product">
             <thead>
@@ -140,12 +113,9 @@ const AddorRemove = () => {
             )}
           </div>
         </div>
-        {/* add groupd */}
         <div className="addgroup">
           <h2>Add New Product</h2>
           <form className="form" onSubmit={handleSubmit}>
-            {/* <label htmlFor="id">ID:</label>
-            <input type="number" id="id" name="id" required /> */}
             <label htmlFor="title">Title:</label>
             <input type="text" id="title" name="title" required />
             <label htmlFor="description">Description:</label>
@@ -173,7 +143,7 @@ const AddorRemove = () => {
             <button type="submit">Add Product</button>
           </form>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

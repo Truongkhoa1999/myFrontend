@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom'
 import React, { useContext, useEffect, useState } from 'react'
 // import { findMatchingSearch } from '../../logicfx/userUtil'
 import { useSearchContext } from '../../react/context/SerachContext'
-import { Produx } from '../../Data/Produx'
 import { Avatar, Badge, Menu, MenuItem } from '@mui/material'
 import { ShoppingCart } from '@mui/icons-material'
 import { ProductState } from '../../redux/reducers/getProductsReducer'
@@ -61,7 +60,7 @@ export default function NavBar2() {
         navigate('/search')
       })
       .catch((error) => {
-        console.log('Error in fetching products')
+        console.log(error)
       })
   }
   //   Hanled MenuClicked

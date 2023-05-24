@@ -3,11 +3,11 @@ import { CartProps } from '../../type/Cart/CartProps'
 import { AppDispatch, RootState } from '../../redux/store'
 import { decreaseQuantity, increaseQuantity, saveCart } from '../../redux/actions/cart'
 import NavBar2 from '../NavBar/NavBar'
-import { Footer } from '../Footer/Footer'
 import './style/Cart.scss'
 import { fetchProducts } from '../../redux/actions/getProducts'
 import { useState } from 'react'
 import jwt_decode from 'jwt-decode'
+import Footer from '../Footer/Footer'
 
 const Cart: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -65,34 +65,31 @@ const Cart: React.FC = () => {
         localStorage.removeItem('cart')
         return { ...item, userId }
       })
-
       console.log(cartWithUserId)
       // Send POST request to backend
       const response = await fetch('http://localhost:8080/api/v1/carts/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          // Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(cartWithUserId),
       })
-
+      console.log(response)
       if (!response.ok) {
         throw new Error('Failed to save cart.')
       }
-
       const savedCart = await response.json()
       console.log('Saved cart:', savedCart)
-
       // Display a success notification or perform any other desired action
       setNotification('Cart saved successfully.')
-
-      // Clear the cart or perform any other desired action
-      // dispatch(clearCart());
-    } catch (error) {
+    } catch (error:any) {
       // Handle errors, display an error notification, or perform any other desired action
-      console.error('Error saving cart:', error)
-      setNotification('Error saving cart. Please try again.')
+      if(error instanceof Error && error.message === 'out of stock'){
+        setNotification ('out of stock')
+      } else{
+        setNotification('Error saving cart. Please try again.')
+      }
     }
   }
   return (
