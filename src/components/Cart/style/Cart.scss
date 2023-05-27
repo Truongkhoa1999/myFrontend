@@ -3,67 +3,90 @@
   width: 100vw;
   display: flex;
   flex-direction: column;
-  color: orange;
-
+  color: green;
   background-color: white;
-  .tableContent {
-    width: 75%;
-    height: 100%;
-    margin-top: 10rem;
-    margin-bottom: 10rem;
-    overflow-y: scroll;
-    align-self: center;
+  .body_container{
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    // border: 2px solid red;
-    // border: 5px solid red;
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      height: 20%;
-      th {
-        background-color: #e87b08;
-        font-weight: bold;
-        text-align: left;
-        padding: 10px;
-        color: yellow;
-      }
-      td {
-        border: 1px solid #ccc;
-        padding: 10px;
-        img {
-          width: 100px;
+    height: 100vh;
+  flex-direction: column;
+text-align: center;
+    .tableContent {
+      width: 75%;
+      height: 100%;
+      margin-top: 10rem;
+      margin-bottom: 10rem;
+      overflow-y: scroll;
+      align-self: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      table {
+        width: 80%;
+        border-collapse: collapse;
+        height: 20%;
+        th {
+          background-color: #028f25;
+          font-weight: bold;
+          text-align: left;
+          padding: 10px;
+          color: rgb(255, 176, 6);
+        }
+        td {
+          // border: 1px solid #ccc;
+          padding: 10px;
+          img {
+            width: 100px;
+          }
+        }
+        tr:nth-child(odd) {
+          background-color: #ffffff;
+          color: black;
+        }
+        tr:nth-child(even) {
+          background-color: #212121;
+        }
+        tfoot {
+          text-align: right;
+          font-size: 30px;
+          color: rgb(255, 132, 0);
+          font-weight: bold;
+          margin-top: 20px;
         }
       }
-      tr:nth-child(odd) {
-        background-color: #ffffff;
-        color: black;
+      .quantity_group {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        button{
+          background-color: green;
+          color: white;
+          border: none;
+          border-radius: 50%;
+          &:hover{
+            cursor: pointer;
+            border: 1px solid orange;
+            transition: 1s;
+          }
+        }
       }
-      tr:nth-child(even) {
-        background-color: #212121;
-      }
-      tfoot {
-        text-align: right;
-        font-size: 30px;
-        color: rgb(255, 132, 0);
+      .checkout__button {
+        width: 10rem;
+        height: 2rem;
+        align-self: center;
+        border: 2px solid black;
+        background-color: white;
+        color: green;
+        font-size: 1rem;
         font-weight: bold;
-        margin-top: 20px;
+        &:hover{
+          cursor: pointer;
+          background-color: green;
+          color: white;
+          border: 2px solid orange;
+          transition: 1s;
+        }
       }
     }
-    .quantity_group {
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-    }
-    .checkout__button {
-      width: 50%;
-      align-self: center;
-    }
-  }
-  .footer__container {
-    background-color: white;
-    width: 100%;
-    color: black;
   }
 }

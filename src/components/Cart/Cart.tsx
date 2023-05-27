@@ -8,6 +8,8 @@ import { fetchProducts } from '../../redux/actions/getProducts'
 import { useState } from 'react'
 import jwt_decode from 'jwt-decode'
 import Footer from '../Footer/Footer'
+import jwtDecode from 'jwt-decode'
+import { DecodedToken } from '../../type/DecodedToken/DecodedToken'
 
 const Cart: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -19,8 +21,6 @@ const Cart: React.FC = () => {
     (total: number, item: CartProps) => total + item.price * item.quantity,
     0
   )
-
-  // Increase the quantity of an item
   const handleIncreaseQuantity = (item: CartProps) => {
     const product = products.find((p) => p.id === item.cartId)
     if (product && item.quantity <= product.quantity) {
@@ -38,11 +38,6 @@ const Cart: React.FC = () => {
       dispatch(decreaseQuantity(item.cartId))
     }
   }
-
-  // Save the cart to local storage
-  // ...
-
-  // Save the cart to local storage and send a POST request to the backend
   const handleSaveCart = async () => {
     try {
       // Save cart to local storage
@@ -51,10 +46,18 @@ const Cart: React.FC = () => {
       const token = localStorage.getItem('jwt') // Replace 'yourTokenKey' with the actual key for your JWT
 
       // Decode the JWT to access its payload
-      const decodedToken: { userId?: string } | null = token ? jwt_decode(token) : null
+      // const decodedToken: { userId?: string } | null = token ? jwt_decode(token) : null
+      const decodedToken = token ? (jwtDecode(token) as DecodedToken) : null
 
       // Extract the userId from the decoded token
       const userId = decodedToken?.userId ?? null
+
+      const expirationTime = decodedToken?.exp || 0 // Get the expiration time from the decoded JWT
+      const currentTime = Math.floor(Date.now() / 1000) // Convert current time to seconds
+      if (currentTime > expirationTime) {
+        // Token has expired, handle accordingly
+        throw new Error('expired JWT')
+      }
 
       // Create a new cart object with the user ID
       const cartWithUserId = cart.map((item: CartProps, index: number) => {
@@ -80,22 +83,21 @@ const Cart: React.FC = () => {
         throw new Error('Failed to save cart.')
       }
       const savedCart = await response.json()
-      console.log('Saved cart:', savedCart)
       // Display a success notification or perform any other desired action
       setNotification('Cart saved successfully.')
-    } catch (error:any) {
+    } catch (error: any) {
       // Handle errors, display an error notification, or perform any other desired action
-      if(error instanceof Error && error.message === 'out of stock'){
-        setNotification ('out of stock')
-      } else{
+      if (error instanceof Error && error.message === 'out of stock') {
+        setNotification('out of stock')
+      } else if (error instanceof Error && error.message === 'expired JWT') {
+        setNotification('Your login session has been expired, please sign-in again.')
+      } else {
         setNotification('Error saving cart. Please try again.')
       }
     }
   }
   return (
     <div className="cart__container">
-      {/* nav */}
-      {/* ... */}
       {notification && (
         <div className="notification">
           <span>{notification}</span>
@@ -104,55 +106,73 @@ const Cart: React.FC = () => {
           </button>
         </div>
       )}{' '}
-      {/* ... */}
       <div className="nav__container">
         <NavBar2 />
       </div>
-      <h2>Your Cart</h2>
-      {cart.length === 0 ? (
-        <p>No items in the cart</p>
-      ) : (
-        <div className="tableContent">
-          <table className="cart">
-            <thead>
-              <tr>
-                <th>Item</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {cart.map((item: CartProps, index: number) => (
-                <tr key={`${item.cartId}-${index}`}>
-                  <td>{item.title}</td>
-                  <td>
-                    <div className="quantity_group">
-                      <button onClick={() => handleIncreaseQuantity(item)}>+</button>
-                      <span>{item.quantity}</span>
-                      <button onClick={() => handleDecreaseQuantity(item)}>-</button>
-                    </div>
-                  </td>
-                  <td>{item.price} €</td>
-                  <td>{item.price * item.quantity} €</td>
+      <div className="body_container">
+        <h2>Your Cart</h2>
+        {cart.length === 0 ? (
+          <p>No items in the cart</p>
+        ) : (
+          <div className="tableContent">
+            <table className="cart">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Quantity</th>
+                  <th>Stock</th>
+                  <th>Price</th>
+                  <th>Total</th>
                 </tr>
-              ))}
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colSpan={3}>Total Price:</td>
-                <td>{totalPrice} €</td>
-              </tr>
-            </tfoot>
-          </table>
-          <button className="checkout__button" onClick={handleSaveCart}>
-            Checkout
-          </button>
-        </div>
-      )}
-      <div className="footer__container">
-        <Footer />
+              </thead>
+              <tbody>
+                {/* {cart.map((item: CartProps, index: number) => (
+                  <tr key={`${item.cartId}-${index}`}>
+                    <td>{item.title}</td>
+                    <td>
+                      <div className="quantity_group">
+                        <button onClick={() => handleIncreaseQuantity(item)}>+</button>
+                        <span>{item.quantity}</span>
+                        <button onClick={() => handleDecreaseQuantity(item)}>-</button>
+                      </div>
+                    </td>
+                    <td>{item.price} €</td>
+                    <td>{item.price * item.quantity} €</td>
+                  </tr>
+                ))} */}
+                {cart.map((item: CartProps, index: number) => {
+                  const product = products.find((p) => p.id === item.productId)
+                  return (
+                    <tr key={`${item.cartId}-${index}`}>
+                      <td>{item.title}</td>
+                      <td>
+                        <div className="quantity_group">
+                          <button onClick={() => handleIncreaseQuantity(item)}>+</button>
+                          <span>{item.quantity}</span>
+                          <button onClick={() => handleDecreaseQuantity(item)}>-</button>
+                        </div>
+                      </td>
+                      <td>{product?.quantity}</td>
+                      <td>{item.price} €</td>
+                      <td>{item.price * item.quantity} €</td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colSpan={3}>Total Price:</td>
+                  <td>{totalPrice} €</td>
+                </tr>
+              </tfoot>
+            </table>
+            <button className="checkout__button" onClick={handleSaveCart}>
+              Checkout
+            </button>
+          </div>
+        )}
       </div>
+      <Footer />
     </div>
   )
 }

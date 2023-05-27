@@ -1,0 +1,12 @@
+.brand_container{
+    width: 65%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: wrap;
+      
+        img{
+            width: 150px;
+        }
+}

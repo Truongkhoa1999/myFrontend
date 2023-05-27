@@ -1,0 +1,88 @@
+.remove_container{
+    width: 100%;
+    height: auto;
+    color: black;
+    border-bottom: 4px solid gray;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    .searchbar{
+        width: 80vw;
+        align-self: center;
+        display: flex;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+
+        input{
+            width: 80%;
+            height: 50px;
+            margin: auto;
+            font-size: 25px;
+        }
+    }
+    .all{
+        display: flex;
+       
+        width: 80vw;
+        align-self: center;
+        justify-content: flex-end;
+        
+        button{
+            width: 150px;
+            height: 20px;
+            margin-left: 1rem;
+            background-color: white;
+          
+            &:hover{
+                background-color: green;
+                transition: 0.5s;
+                color: white;
+                cursor: pointer;
+
+            }
+        }    
+    }
+    .product{
+        width: 80vw;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        align-self: center;
+        display: flex;
+        flex-direction: row;
+        border: 0.5px solid rgb(148, 148, 148);
+        justify-content: space-between;
+
+        .item_img{
+            width: 100px;
+            height: 100px;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+        .info{
+            display: flex;
+            flex-direction: column;
+            width: 605px;
+        
+        }
+
+        .remove_button {
+            border: none;
+            background-color: transparent;
+            color: #000;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 40px;
+            height: 40px;
+            &.active {
+                background-color: #00ff00; // Apply your desired background color for the active button
+                color: #fff; // Apply your desired text color for the active button
+              }
+              &:hover{
+                border: 2px solid black;
+              }
+          }
+        
+    }
+
+}

@@ -4,9 +4,6 @@ import { RootState } from '../../redux/store'
 import { fetchProducts } from '../../redux/actions/getProducts'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch } from '../../redux/store'
-import MultiActionAreaCard from '../HomePage/MultiActionAreaCard'
-import Navbar from '../NavBar/NavBar'
-import { CircularProgress, Link } from '@mui/material'
 // import '../HomPage/style/HomePage.scss'
 import './style/SearchResult.scss'
 import SearchContext from '../../react/context/SerachContext'
@@ -20,7 +17,7 @@ export default function SearchResult() {
   const dispatch = useDispatch<AppDispatch>()
   // const { products } = useSelector((state: RootState) => state.products)
   const { product } = React.useContext(SearchContext)
-console.log('this aux product', product)
+  console.log('this aux product', product)
   React.useEffect(() => {
     dispatch(fetchProducts())
   }, [dispatch])
@@ -32,27 +29,25 @@ console.log('this aux product', product)
         <NavBar2 />
       </div>
       <div className="product__container">
-      {product?.length === 0 ? (
-          <NotFound/>
+        {product?.length === 0 ? (
+          <NotFound />
         ) : (
           product?.map((product) => (
             <RouterLink key={product.id} to={`/product/${product.id}`}>
-              <MultiActionAreaCard
-                key={product.id}
-                title={product.title}
-                description={product.description}
-                image={product.thumbnail}
-                className="multicard"
-                price={`${product.price} €`}
-              />
+              <div className="product">
+                <h2>{product.title}</h2>
+                <h2>{product.price}€</h2>
+                <img src={product.thumbnail} alt="products" />
+              </div>
             </RouterLink>
           ))
         )}
-      </div>
-      {/* footer */}
-      <div className="footer__container">
+              <div className="footer__container">
         <Footer />
       </div>
+      </div>
+
+
     </div>
   )
 }

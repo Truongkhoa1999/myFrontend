@@ -1,0 +1,161 @@
+.filter_container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 35rem;
+  align-items: center;
+  height: auto;
+  margin-top: 2rem;
+  .buttongroup {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    @media screen and (max-width: 600px) {
+      flex-wrap: wrap;
+    }
+    button {
+      margin: 10px;
+      width: 6rem;
+     padding-top: 8px;
+     padding-bottom: 8px;
+
+      border: 2px solid green;
+      background-color: white;
+      border-radius: 5px;
+      font-weight: bold;
+      text-align: center;
+      &:hover{
+        cursor: pointer;
+        background-color: green;
+        border: 2px solid orange;
+        color: white;
+        transition: 1s;
+      }
+      @media screen and (max-width: 600px) {
+        padding: 9px;
+        border: 1px solid green;
+        width: auto;
+        margin-top: 0.25rem;
+
+        font-size: 0.75rem;
+        font-weight: bold;
+      }
+    }
+  }
+  .card_container {
+    border: 10px solid rgb(95, 1, 95);
+    max-width: 80rem;
+    min-height: 25em;
+    padding-left: 22em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1rem; /* Add some bottom padding to ensure all cards are visible */
+    background-color: purple;
+    overflow-x: scroll;
+    scroll-behavior: smooth; /* Add this line */
+    .card_wrapper {
+      display: flex;
+      margin-left: 130rem;
+      margin-right: 4rem;
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+.card {
+  min-width: 200px;
+  height: 350px;
+  padding: 0.5rem;
+  margin-left: 2rem;
+  box-shadow: 10px 5px 5px orange;
+  color: black;
+  background-color: white;
+  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Apply transitions for smooth sliding effect */
+  transition: transform 0.3s ease;
+  will-change: transform;
+  h2 {
+    color: rgb(240, 135, 16);
+    font-size: 30px;
+    font-weight: bold;
+  }
+  @media screen and (max-width: 600px) {
+    max-width: 60px;
+    max-height: 350px;
+    margin-left: 9px;
+    margin-right: 9px;
+    border: 1px solid black;
+    align-items: flex-start;
+  }
+  &:hover {
+    transform: scale(1.05);
+  }
+  img {
+    // max-width: 150px;
+    max-height: 250px;
+    width: 100%;
+    object-fit: contain;
+  }
+  button {
+    width: 100%;
+    padding: 0.15em;
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    font-size: 0.75rem;
+    position: absolute;
+    bottom: 0;
+  }
+  h3 {
+    margin-left: 10px;
+    font-size: 0.75rem; /* Use relative unit for font size */
+  }
+  h4 {
+    margin-left: 10px;
+    font-size: 0.65rem; /* Use relative unit for font size */
+  }
+  p {
+    margin-left: 10px;
+    font-size: 0.65em; /* Use relative unit for font size */
+  }
+  .disabled {
+    background-color: grey;
+  }
+}
+.arrow-group {
+  width: 20rem;
+  align-self: flex-end;
+  margin-right: 10rem;
+
+  display: flex;
+  justify-content: center;
+  .arrow {
+    display: flex;
+    margin-left: 1rem;
+    align-items: center;
+    justify-content: center;
+    background-color: green;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.2rem;
+    padding: 0.05rem;
+    cursor: pointer;
+    transform: translateY(-50%);
+    z-index: 1;
+    &:hover{
+      cursor: pointer;
+      background-color: rgb(255, 153, 0);
+      color: white;
+      
+    }
+  }
+}

@@ -1,0 +1,41 @@
+.list_products {
+  color: black;
+  width: 100%;
+  overflow-y: scroll;
+  align-self: center;
+  h2{
+    text-align: center;
+  }
+  .product {
+    width: 50rem;
+    margin-right: auto;
+    margin-left: auto;
+margin-top: 2rem;
+    padding: 10px;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    overflow-x: scroll;
+    margin-bottom: 2rem;
+
+    &:hover {
+      scale: 1.05;
+      border: 2px solid green;
+      transition: 0.5s;
+      cursor: pointer;
+    }
+    h3 {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    p {
+      margin: 0;
+      color: #888;
+    }
+    img {
+      width: 50px;
+      height: 50px;
+    }
+  }
+}

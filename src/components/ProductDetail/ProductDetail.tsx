@@ -47,7 +47,7 @@ const ProductDetail = () => {
     }
     const clonedProduct = [...products]
     setRelevantProducts(
-      clonedProduct.filter((p) => p.category.categoryId === productById?.category.categoryId)
+      clonedProduct.filter((p) => p.category.title === productById?.category.title)
     )
   }, [dispatch, id])
   if (loading) {

@@ -30,7 +30,7 @@ export default function Dashboard() {
               </div>
             </div>
           ))
-        ) : error === "JWT has expired" ? (
+        ) : error && error === "expired JWT" ? (
           <ExpiredSignin />
         ) : (
           <NotSignin />
