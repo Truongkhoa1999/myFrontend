@@ -51,7 +51,7 @@ export default function NavBar2() {
       searchInput: data.get('userSearch') as string,
     }
     // Make API for searching mechanism
-    fetch(`http://localhost:8080/api/v1/products/search?q=${input.searchInput}`)
+    fetch(`https://fs14-ecommerce.herokuapp.com/api/v1/products/search?q=${input.searchInput}`)
       .then((response) => response.json())
       .then((data) => {
         setProduct(data)

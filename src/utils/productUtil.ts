@@ -40,7 +40,7 @@ export function limitTitleWords(title:string, maxWords:number) :string {
 }
 export function handleClick  (id:string)  {
   // Make the API call to update the clicks property
-  fetch(`http://localhost:8080/api/v1/statics/clicks/${id}`, { method: 'PUT' })
+  fetch(`https://fs14-ecommerce.herokuapp.com/api/v1/statics/clicks/${id}`, { method: 'PUT' })
     .then(response => {
       if (response.ok) {
         console.log('Clicks updated successfully');
@@ -68,7 +68,7 @@ export const fetchCartByUserId = async () => {
       throw new Error('JWT token not found');
     }
 
-    const url = `http://localhost:8080/api/v1/carts/${userId}`;
+    const url = `https://fs14-ecommerce.herokuapp.com/api/v1/carts/${userId}`;
     const response = await fetch(url, {
       method: "GET",
       headers: {

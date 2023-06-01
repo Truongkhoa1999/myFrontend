@@ -4,15 +4,18 @@ import {
   DECREASE_QUANTITY,
   SAVE_CART,
   LOCAL_CART_KEY,
+  SAVE_CART_FAILURES,
 } from '../actions/cart'
 import { AnyAction } from 'redux'
 import { CartProps } from '../../type/Cart/CartProps'
 export interface cartState {
   cart: CartProps[]
+  error: string | Error
 }
 const savedCart = localStorage.getItem('cart')
 const initialState: cartState = {
   cart: savedCart ? JSON.parse(savedCart) : [],
+  error: '',
 }
 export const cartReducer = (state = initialState, action: AnyAction) => {
   switch (action.type) {
@@ -65,6 +68,12 @@ export const cartReducer = (state = initialState, action: AnyAction) => {
       return {
         ...state,
         cart: cartItems,
+      }
+    }
+    case SAVE_CART_FAILURES: {
+      return {
+        ...state,
+        error: action.payload,
       }
     }
     default:

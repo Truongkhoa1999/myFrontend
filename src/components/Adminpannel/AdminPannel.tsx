@@ -1,6 +1,5 @@
 
 import NavBar2 from '../NavBar/NavBar'
-import AddorRemove from '../AddorRemove/AddorRemove'
 import Remove from './Remove'
 import { useEffect } from 'react'
 import { fetchProducts } from '../../redux/actions/getProducts'

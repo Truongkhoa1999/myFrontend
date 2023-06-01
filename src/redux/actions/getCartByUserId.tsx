@@ -44,14 +44,13 @@ export const getCartByUserId = () => async (dispatch: Dispatch<CartByUserIdActio
     if (currentTime > expirationTime) {
       // Token has expired, handle accordingly
       throw new Error('expired JWT')
-      return
     }
     if (!token || !userId) {
       throw new Error('JWT token or user ID not found')
     }
     // Check if the token has expired
 
-    const url = `http://localhost:8080/api/v1/carts/${userId}`
+    const url = `https://fs14-ecommerce.herokuapp.com/api/v1/carts/${userId}`
     const response = await fetch(url, {
       method: 'GET',
       headers: {

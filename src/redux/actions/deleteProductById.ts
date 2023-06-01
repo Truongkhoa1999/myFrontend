@@ -41,7 +41,7 @@ export const deleteProductsById = (id: ReturnType<typeof uuidv4>) => {
 
       dispatch({ type: DELETE_PRODUCTBYID_REQUEST })
 
-      const response = await fetch(`http://localhost:8080/api/v1/products/delete/${id}`, {
+      const response = await fetch(`https://fs14-ecommerce.herokuapp.com/api/v1/products/delete/${id}`, {
         method: 'PUT',
         headers: {
           // 'Content-Type': 'application/json',

@@ -3,13 +3,13 @@ import { CartByUserIdActionTypes, FETCH_CARTBYUSERID_FAILURE, FETCH_CARTBYUSERID
 
 export interface CartByUserIdState {
   loading: boolean;
-  error: string | null;
+  error: string | Error;
   cartByUserId: CartProps | null;
 }
 
 const initialState: CartByUserIdState = {
   loading: false,
-  error: null,
+  error: '',
   cartByUserId: null,
 };
 

@@ -40,14 +40,6 @@ function App(): JSX.Element {
           <Route path="/adminpannel" element={<AdminPannel />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/mostvisit" element={<MostVisit />} />
-          {/* <Route
-            path="/adminpannel"
-            element={
-              <ProtectedRoute>
-                <AdminPannel />
-              </ProtectedRoute>
-            }
-          /> */}
           <Route path="/cart" element={<Cart />}/>
         </Routes>
       </SearchContext.Provider>

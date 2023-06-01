@@ -19,7 +19,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch } from '../../redux/store'
 import { RootState } from '../../redux/store'
 // Hard data
-import { admins } from '../../Data/Admins'
 
 // React
 import { useNavigate } from 'react-router-dom'

@@ -5,6 +5,7 @@ export const ADD_CART = 'ADD_CART'
 export const INCREASE_QUANTITY = 'INCREASE_QUANTITY'
 export const DECREASE_QUANTITY = 'DECREASE_QUANTITY'
 export const SAVE_CART = 'SAVE_CART'
+export const SAVE_CART_FAILURES = 'SAVE_CART_FAILURES'
 // Local storage key
 export const LOCAL_CART_KEY = 'cart'
 export const LOCAL_CART = 'cart_'
@@ -46,3 +47,11 @@ export function saveCart(cart: CartProps[]) {
   }
 }
 // <>><<>>
+
+export function saveCartFailures(error: Error) {
+  const errorMessage = error instanceof Error ? error.message : "failed to saved cart, pls try again"
+  return {
+    type:SAVE_CART_FAILURES,
+    payload: errorMessage,
+  }
+}

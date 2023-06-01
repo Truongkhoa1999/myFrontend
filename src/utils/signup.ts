@@ -2,7 +2,8 @@ import { AuthenticateTypes, setToken, setWarning } from '../redux/actions/getTok
 export const signup = (username: string, password: string, firstname:string, avatar:string, navigate: Function) => {
   return async (dispatch: any) => {
     try {
-      const response = await fetch('http://localhost:8080/signup', {
+      // 'https://localhost:8080/signup'
+      const response = await fetch('https://fs14-ecommerce.herokuapp.com/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

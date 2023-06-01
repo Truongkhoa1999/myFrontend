@@ -40,7 +40,7 @@ export const deleteAllProducts = () => {
 
       dispatch({ type: DELETE_ALL_PRODUCTS_REQUEST })
 
-      const response = await fetch('http://localhost:8080/api/v1/products/deleteAll/', {
+      const response = await fetch('https://fs14-ecommerce.herokuapp.com/api/v1/products/deleteAll/', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

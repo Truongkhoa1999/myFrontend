@@ -32,7 +32,7 @@ export type ProductActionTypes =
 export const fetchProducts = () => async (dispatch: Dispatch<ProductActionTypes>) => {
   dispatch({ type: FETCH_PRODUCTS_REQUEST })
   try {
-    const response = await fetch('http://localhost:8080/api/v1/products/')
+    const response = await fetch('https://fs14-ecommerce.herokuapp.com/api/v1/products/')
     const data = await response.json()
     dispatch({
       type: FETCH_PRODUCTS_SUCCESS,

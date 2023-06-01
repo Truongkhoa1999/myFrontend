@@ -79,7 +79,7 @@ export default function HomePage() {
           {products.slice(0, 1).map((product) => (
             <div key={product.id} className="demo_cards">
               <div className="products_image">
-                <img src={product.images[1]}></img>
+                <img src="https://ic.jimms.fi/product/9/4/338095-ig800gg.jpg"></img>
               </div>
               <div className="information">
                 <h3>New Arrival</h3>
@@ -90,7 +90,7 @@ export default function HomePage() {
           {products.slice(1, 2).map((product) => (
             <div key={product.id} className="demo_cards">
               <div className="products_image">
-                <img src={product.images[1]}></img>
+                <img src="https://ic.jimms.fi/product/4/6/432743-ig800gg.jpg"></img>
               </div>
               <div className="information">
                 <h3>Most visit</h3>
@@ -101,7 +101,7 @@ export default function HomePage() {
           {products.slice(2, 3).map((product) => (
             <div key={product.id} className="demo_cards">
               <div className="products_image">
-                <img src={product.images[1]}></img>
+                <img src="https://ic.jimms.fi/product/0/0/129509-ig800gg.jpg"></img>
               </div>
               <div className="information">
                 <h3>We Recommend</h3>

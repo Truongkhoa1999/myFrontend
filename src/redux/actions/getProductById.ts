@@ -32,7 +32,7 @@ export const getProductsById =
   (id: ReturnType<typeof uuidv4>) => async (dispatch: Dispatch<ProductByIdActionTypes>) => {
     dispatch({ type: FETCH_PRODUCTBYID_REQUEST })
     try {
-      const response = await fetch(`http://localhost:8080/api/v1/products/id/${id}`)
+      const response = await fetch(`https://fs14-ecommerce.herokuapp.com/api/v1/products/id/${id}`)
       const data = await response.json()
       dispatch({
         type: FETCH_PRODUCTBYID_SUCCESS,

@@ -52,7 +52,7 @@ export const addProduct = (productData: RequestProductProps) => {
     }
     dispatch(addProductRequest())
     try {
-      const response = await fetch('http://localhost:8080/api/v1/products/add', {
+      const response = await fetch('https://fs14-ecommerce.herokuapp.com/api/v1/products/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

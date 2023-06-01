@@ -70,7 +70,7 @@ const Cart: React.FC = () => {
       })
       console.log(cartWithUserId)
       // Send POST request to backend
-      const response = await fetch('http://localhost:8080/api/v1/carts/', {
+      const response = await fetch('https://fs14-ecommerce.herokuapp.com/api/v1/carts/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -85,11 +85,10 @@ const Cart: React.FC = () => {
       const savedCart = await response.json()
       // Display a success notification or perform any other desired action
       setNotification('Cart saved successfully.')
-    } catch (error: any) {
+    } catch (error: unknown) {
       // Handle errors, display an error notification, or perform any other desired action
-      if (error instanceof Error && error.message === 'out of stock') {
-        setNotification('out of stock')
-      } else if (error instanceof Error && error.message === 'expired JWT') {
+     
+      if (error instanceof Error && error.message === 'expired JWT') {
         setNotification('Your login session has been expired, please sign-in again.')
       } else {
         setNotification('Error saving cart. Please try again.')

@@ -40,7 +40,7 @@ export const restoreAllProducts = () => {
 
       dispatch({ type: RESTORE_ALL_PRODUCTS_REQUEST })
 
-      const response = await fetch('http://localhost:8080/api/v1/products/restoreAll/', {
+      const response = await fetch('https://fs14-ecommerce.herokuapp.com/api/v1/products/restoreAll/', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
